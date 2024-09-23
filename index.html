@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wage Calculator</title>
+</head>
+<body>
+    <header>
+        <h1 class="calc-title">Wage Calculator</h1>
+    </header>
+    
+    <section class="tip_contatiner">
+        <form id="initialWageForm">
+            <label for="hourly">Hourly Wage</label>
+            <input type="number" id="hourly" placeholder="Enter your Hourly Wage"/>
+            <label for="biWeekly">Bi-Weekly Hours</label>
+            <input type="number" id="biWeekly" placeholder="Enter your bi-weekly hours total"/>
+        </form>
+        <form id="wageRaiseForm">
+            <label for="upfrontRaise">Upfront Raise (in percent)</label>
+            <input type="number" id="upfrontRaise" placeholder="Please enter the upfront raise in percentage">
+            <label for="yearOneRaise"> Year One Raise (in percent)</label>
+            <input type="number" id="yearOneRaise" placeholder="Please enter the year one raise in percentage">
+            <label for="yearTwoRaise">Year Two Raise (in percent)</label>
+            <input type="number" id="yearTwoRaise" placeholder="Please enter the year two raise in percentage">
+        </form>
+    </section>
+    <section id="wageResults"></section>
+   <script src="src/calculator.js"></script>
+</body>
+</html>
