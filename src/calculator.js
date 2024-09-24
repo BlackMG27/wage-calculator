@@ -1,13 +1,16 @@
 //set up the variables
     //check for hourly  
-    
+    let numFormat;
+    let titleRaise;
 
     //grab formatting divs
     let wageResults = grabID('wageResults')
     let upFrontDiv = grabID('upFrontContainer')
     let yearOneDiv = grabID('yearOneContainer')
     let yearTwoDiv = grabID('yearTwoContainer')
-    
+    let upTitle = grabID('upFrontTitle')
+    let oneTitle = grabID('yearOneTitle')
+    let twoTitle = grabID('yearTwoTitle')
     //store answer ids
     let upFrontHour = grabID('upFrontHourly')
     let upFrontBiWeek = grabID('upFrontBiWeekly')
@@ -18,6 +21,7 @@
     let yearTwoHour = grabID('yearTwoHourly')
     let yearTwoBiWeek = grabID('yearTwoBiWeekly')
     let yearTwoYear = grabID('yearTwoYearly')
+
 
      //multiply by hours in bi-weekly, then by 26
     let yearly;
@@ -72,36 +76,20 @@
         }
 
         //formats the wage results titles
-        function resultTitle(text, container, ans, raise){
-            //create a new title 
-            if(!text.includes('Wage Results')){
-                const title = document.createElement('h3')
-                //add the text via createTextNode 
-                const titleContent = document.createTextNode(` Your ${text} Wage Raise by ${(raise * 100).toFixed(1)}%`)
-                //add the title class via classList.add
-                title.classList.add('results_container_title')
-                 //add text to the title via appendChild
-                title.appendChild(titleContent)
-                container.insertBefore(title, ans)
-            //insert title before answer id
-            }else{
-                    const title = document.createElement('h2')
-                    const titleContent = document.createTextNode(`Your ${text}`)
-                    title.classList.add('wage_results_title')
-                    //add text to the title via appendChild
-                    title.appendChild(titleContent)
-                    container.insertBefore(title, ans)
-            //insert title before answer id
-                }
-            //grab the first answer id
-            
+        function resultTitleFormat(title, raise){
+            raise = (raise * 100).toFixed(1)
+            raise = `${raise}%`
+            titleRaise = document.createElement('span')
+            titleRaise.innerHTML = raise
+            return title.appendChild(titleRaise)
+
         }
 
         //add the addEventListener function
         document.getElementById('wageForm').addEventListener('submit', function(e){
             //prevents page from reloading 
             e.preventDefault();
-
+            
             //grab the input variables 
             let hourly = Number(grabFormValues('hourly'))
             //store bi-weekly 
@@ -112,6 +100,7 @@
             let yearOneRaise = Number(percentConvert('yearOneRaise'))
             let yearTwoRaise = Number(percentConvert('yearTwoRaise'))
             //clears the outputs
+                //title.value = ''
                 upFrontHour.value = ''
                 upFrontBiWeek.value = ''
                 upFrontYear.value = ''
@@ -122,10 +111,10 @@
                 yearTwoBiWeek.value = ''
                 yearTwoYear.value = ''
             //creates the result sections 
-                resultTitle('Wage Results', wageResults, upFrontDiv, '')
-                resultTitle('Upfront', upFrontDiv, upFrontHour, upfrontRaise)
-                resultTitle('Year One', yearOneDiv, yearOneHour, yearOneRaise)
-                resultTitle('Year Two', yearTwoDiv, yearTwoHour, yearTwoRaise)
+            resultTitleFormat(upTitle, upfrontRaise)
+            resultTitleFormat(oneTitle, yearOneRaise)
+            resultTitleFormat(twoTitle, yearTwoRaise)
+                
             //calls all of the functions
                 getYearly(hourly, biWeekly)
                 upHourlyRaise(hourly, upfrontRaise)
@@ -138,6 +127,9 @@
                 yearTwoBiWeekRaise(yearTwoHourly, biWeekly)
                 yearTwoYearRaise(yearTwoBiWeekly)
 
+                wageResults.classList.remove('wage_results_inactive')
+                wageResults.classList.add('wage_results_active')
+
            
         })
 
@@ -146,58 +138,92 @@
     function upHourlyRaise (hourly, raise){
         //upHourly = hourly + (hourly x upfrontRaise)
         upHourly = hourly + (hourly * raise)
-        upFrontHour.textContent = `Upfront Hourly Wage: ${intoDollars(upHourly.toFixed(2))}`
+        //format the result
+        formatNumber(intoDollars(upHourly.toFixed(2)))
+        upFrontHour.textContent = `Upfront Hourly Wage: `
+        upFrontHour.appendChild(numFormat)
+
     }
         
     function upBiWeeklyRaise(hour, biWeek){
         //upBiWeekly = bi-weekly + (bi-weekly x upfrontRaise)
         upBiWeekly = hour * biWeek
-        upFrontBiWeek.textContent = `Upfront Bi-Weekly Wage: ${intoDollars(upBiWeekly.toFixed(2))}`
+        //format the result
+        formatNumber(intoDollars(upBiWeekly.toFixed(2)))
+        upFrontBiWeek.textContent = `Upfront Bi-Weekly Wage: `
+        upFrontBiWeek.appendChild(numFormat)
     }
 
     function upYearlyRaise(week){
         //upYearly = yearly + (yearly x upfrontRaise)
         upYearly = week * 26
-        upFrontYear.textContent = `Upfront Yearly Wage: ${intoDollars(upYearly.toFixed(2))}`
+        //format the result 
+        formatNumber(intoDollars(upYearly.toFixed(2)))
+        upFrontYear.textContent = `Upfront Yearly Wage: `
+        upFrontYear.appendChild(numFormat)
     }    
 //year 1
     //multiply by yearOneRaise
-        function yearOneHourRaise(upHour, raise){
-            //yearOneHourly = upHourly + (upHourly x yearOneRaise)
-            yearOneHourly = (upHour * raise) + upHour
-            yearOneHour.textContent = `Year One Hourly Wage: ${intoDollars(yearOneHourly.toFixed(2))}`
-        }
-        
-        function yearOneBiWeekRaise(hour, biWeek){
-            //yearOneBiWeekly = upBiWeekly + (upBiWeekly x yearOneRaise)
-            yearOneBiWeekly = biWeek * hour
-            yearOneBiWeek.textContent = `Year One Bi-Weekly Wage: ${intoDollars(yearOneBiWeekly.toFixed(2))}`
-        }
-        
-        function yearOneYearRaise(biWeek){
-            //yearOneYearly  = upYearly + (upYearly x yearOneRaise)
-            yearOneYearly = biWeek * 26
-            yearOneYear.textContent = `Year One Yearly Wage: ${intoDollars(yearOneYearly.toFixed(2))}`
-        }
+    function yearOneHourRaise(upHour, raise){
+        //yearOneHourly = upHourly + (upHourly x yearOneRaise)
+        yearOneHourly = (upHour * raise) + upHour
+        //format the result 
+        formatNumber(intoDollars(yearOneHourly.toFixed(2)))
+        yearOneHour.textContent = `Year One Hourly Wage: `
+        yearOneHour.appendChild(numFormat)
+    }
+    
+    function yearOneBiWeekRaise(hour, biWeek){
+        //yearOneBiWeekly = upBiWeekly + (upBiWeekly x yearOneRaise)
+        yearOneBiWeekly = biWeek * hour
+        //format the result 
+        formatNumber(intoDollars(yearOneBiWeekly.toFixed(2)))
+        yearOneBiWeek.textContent = `Year One Bi-Weekly Wage: `
+        yearOneBiWeek.appendChild(numFormat)
+    }
+    
+    function yearOneYearRaise(biWeek){
+        //yearOneYearly  = upYearly + (upYearly x yearOneRaise)
+        yearOneYearly = biWeek * 26
+        //format the result 
+        formatNumber(intoDollars(yearOneYearly.toFixed(2)))
+        yearOneYear.textContent = `Year One Yearly Wage: `
+        yearOneYear.appendChild(numFormat)
+    }
 //year 2
     //multiply by yearTwoRaise
-        function yearTwoHourRaise(hour, raise){
-            //yearTwoHourly = yearOneHourly  + (yearOneHourly x yearTwoRaise)
-            yearTwoHourly = hour + (hour * raise)
-            yearTwoHour.textContent = `Year Two Hourly Wage: ${intoDollars(yearTwoHourly.toFixed(2))}`
-        }
+    function yearTwoHourRaise(hour, raise){
+        //yearTwoHourly = yearOneHourly  + (yearOneHourly x yearTwoRaise)
+        yearTwoHourly = hour + (hour * raise)
+        //format the result 
+        formatNumber(intoDollars(yearTwoHourly.toFixed(2)))
+        yearTwoHour.textContent = `Year Two Hourly Wage: `
+        yearTwoHour.appendChild(numFormat)
+    }
 
-        function yearTwoBiWeekRaise(hour, week){
-            //yearTwoBiWeekly = yearOneBiWeekly + (yearOneBiWeekly x yearTwoRaise)
-            yearTwoBiWeekly = week * hour
-            yearTwoBiWeek.textContent = `Year Two Bi-Weekly Wage: ${intoDollars(yearTwoBiWeekly.toFixed(2))}`
-        }
+    function yearTwoBiWeekRaise(hour, week){
+        //yearTwoBiWeekly = yearOneBiWeekly + (yearOneBiWeekly x yearTwoRaise)
+        yearTwoBiWeekly = week * hour
+        //format the result 
+        formatNumber(intoDollars(yearTwoBiWeekly.toFixed(2)))
+        yearTwoBiWeek.textContent = `Year Two Bi-Weekly Wage: `
+        yearTwoBiWeek.appendChild(numFormat)
+    }
+    
+    function yearTwoYearRaise(week){
+        //yearTwoYearly =  yearOneYearly + (yearOneYearly x yearTwoRaise)
+        yearTwoYearly = week * 26
+        //format the result 
+        formatNumber(intoDollars(yearTwoYearly.toFixed(2)))
+        yearTwoYear.textContent = `Year Two Yearly Wage: `
+        yearTwoYear.appendChild(numFormat)
+    }
         
-        function yearTwoYearRaise(week){
-            //yearTwoYearly =  yearOneYearly + (yearOneYearly x yearTwoRaise)
-            yearTwoYearly = week * 26
-            yearTwoYear.textContent = `Year Two Yearly Wage: ${intoDollars(yearTwoYearly.toFixed(2))}`
-        }
-        
+    function formatNumber(wageNum){
+        numFormat = document.createElement('span')
+        numFormat.classList.add('results_number')
+        numFormat.innerHTML = wageNum
+        return numFormat
+    }
        
 
