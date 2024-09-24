@@ -1,32 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/calculator.css" />
     <title>Wage Calculator</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 class="calc-title">Wage Calculator</h1>
+      <h1 class="calc-title">Wage Calculator</h1>
     </header>
-    
-    <section class="tip_contatiner">
-        <form id="initialWageForm">
+    <section class="tip_container">
+      <form id="wageForm" class="wage_form">
+        <fieldset>
+          <legend class="wage_form_legend">Initial Wage & Hours</legend>
+          <div class="wage_form_group">
             <label for="hourly">Hourly Wage</label>
-            <input type="number" id="hourly" placeholder="Enter your Hourly Wage"/>
+            <input
+              type="text"
+              id="hourly"
+              placeholder="Enter your Hourly Wage"
+            />
+          </div>
+          <div class="wage_form_group">
             <label for="biWeekly">Bi-Weekly Hours</label>
-            <input type="number" id="biWeekly" placeholder="Enter your bi-weekly hours total"/>
-        </form>
-        <form id="wageRaiseForm">
+            <input
+              type="text"
+              id="biWeekly"
+              placeholder="Enter your bi-weekly hours total"
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="wage_form_legend">Raises</legend>
+          <div class="wage_form_group">
             <label for="upfrontRaise">Upfront Raise (in percent)</label>
-            <input type="number" id="upfrontRaise" placeholder="Please enter the upfront raise in percentage">
+            <input
+              type="text"
+              id="upfrontRaise"
+              placeholder="Please enter the upfront raise in percentage"
+            />
+          </div>
+          <div class="wage_form_group">
+            <label for="upfrontRaise">Upfront Raise (in percent)</label>
+            <input
+              type="text"
+              id="upfrontRaise"
+              placeholder="Please enter the upfront raise in percentage"
+            />
+          </div>
+          <div class="wage_form_group">
             <label for="yearOneRaise"> Year One Raise (in percent)</label>
-            <input type="number" id="yearOneRaise" placeholder="Please enter the year one raise in percentage">
+            <input
+              type="text"
+              id="yearOneRaise"
+              placeholder="Please enter the year one raise in percentage"
+            />
+          </div>
+          <div class="wage_form_group">
             <label for="yearTwoRaise">Year Two Raise (in percent)</label>
-            <input type="number" id="yearTwoRaise" placeholder="Please enter the year two raise in percentage">
-        </form>
+            <input
+              type="text"
+              id="yearTwoRaise"
+              placeholder="Please enter the year two raise in percentage"
+            />
+          </div>
+        </fieldset>
+        <button class="wage_form_button">Submit</button>
+      </form>
     </section>
-    <section id="wageResults"></section>
-   <script src="src/calculator.js"></script>
-</body>
+    <section id="wageResults" class="wage_results">
+      <p id="upFrontHourly"></p>
+      <p id="upFrontBiWeekly"></p>
+      <p id="upFrontYearly"></p>
+      <p id="yearOneHourly"></p>
+      <p id="yearOneBiWeekly"></p>
+      <p id="yearOneYearly"></p>
+      <p id="yearTwoHourly"></p>
+      <p id="yearTwoBiWeekly"></p>
+      <p id="yearTwoYearly"></p>
+    </section>
+    <script src="src/calculator.js"></script>
+  </body>
 </html>
