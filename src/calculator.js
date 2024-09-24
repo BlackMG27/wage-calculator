@@ -2,6 +2,7 @@
     //check for hourly  
     let numFormat;
     let titleRaise;
+    
 
     //grab formatting divs
     let wageResults = grabID('wageResults')
@@ -11,6 +12,9 @@
     let upTitle = grabID('upFrontTitle')
     let oneTitle = grabID('yearOneTitle')
     let twoTitle = grabID('yearTwoTitle')
+    let upFrontP = grabID('upFrontP')
+    let yearOneP = grabID('yearOneP')
+    let yearTwoP = grabID('yearTwoP')
     //store answer ids
     let upFrontHour = grabID('upFrontHourly')
     let upFrontBiWeek = grabID('upFrontBiWeekly')
@@ -76,14 +80,13 @@
         }
 
         //formats the wage results titles
-        function resultTitleFormat(title, raise){
+        function resultTitleFormat(raise, divP){        
             raise = (raise * 100).toFixed(1)
             raise = `${raise}%`
-            titleRaise = document.createElement('span')
-            titleRaise.innerHTML = raise
-            return title.appendChild(titleRaise)
-
+            divP.textContent = raise
+            return divP
         }
+ 
 
         //add the addEventListener function
         document.getElementById('wageForm').addEventListener('submit', function(e){
@@ -100,7 +103,10 @@
             let yearOneRaise = Number(percentConvert('yearOneRaise'))
             let yearTwoRaise = Number(percentConvert('yearTwoRaise'))
             //clears the outputs
-                //title.value = ''
+                if(titleRaise){
+                    titleRaise = ''
+                }
+
                 upFrontHour.value = ''
                 upFrontBiWeek.value = ''
                 upFrontYear.value = ''
@@ -110,10 +116,14 @@
                 yearTwoHour.value = ''
                 yearTwoBiWeek.value = ''
                 yearTwoYear.value = ''
+
+              //if the result titles have the span
+              //then run the removeSpan function
+
             //creates the result sections 
-            resultTitleFormat(upTitle, upfrontRaise)
-            resultTitleFormat(oneTitle, yearOneRaise)
-            resultTitleFormat(twoTitle, yearTwoRaise)
+            resultTitleFormat(upfrontRaise, upFrontP)
+            resultTitleFormat(yearOneRaise, yearOneP)
+            resultTitleFormat(yearTwoRaise, yearTwoP)
                 
             //calls all of the functions
                 getYearly(hourly, biWeekly)
@@ -129,7 +139,6 @@
 
                 wageResults.classList.remove('wage_results_inactive')
                 wageResults.classList.add('wage_results_active')
-
            
         })
 
