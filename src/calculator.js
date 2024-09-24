@@ -2,6 +2,12 @@
     //check for hourly  
     
 
+    //grab formatting divs
+    let wageResults = grabID('wageResults')
+    let upFrontDiv = grabID('upFrontContainer')
+    let yearOneDiv = grabID('yearOneContainer')
+    let yearTwoDiv = grabID('yearTwoContainer')
+    
     //store answer ids
     let upFrontHour = grabID('upFrontHourly')
     let upFrontBiWeek = grabID('upFrontBiWeekly')
@@ -50,6 +56,7 @@
             return document.getElementById(id)
         }
 
+        //gets the yearly salary/wage
         function getYearly(hour, biWeek){
             yearly = (hour * biWeek) * 26
             return yearly
@@ -62,6 +69,32 @@
                 currency: 'USD'
             })
             return dollar.format(wage)
+        }
+
+        //formats the wage results titles
+        function resultTitle(text, container, ans, raise){
+            //create a new title 
+            if(!text.includes('Wage Results')){
+                const title = document.createElement('h3')
+                //add the text via createTextNode 
+                const titleContent = document.createTextNode(` Your ${text} Wage Raise by ${(raise * 100).toFixed(1)}%`)
+                //add the title class via classList.add
+                title.classList.add('results_container_title')
+                 //add text to the title via appendChild
+                title.appendChild(titleContent)
+                container.insertBefore(title, ans)
+            //insert title before answer id
+            }else{
+                    const title = document.createElement('h2')
+                    const titleContent = document.createTextNode(`Your ${text}`)
+                    title.classList.add('wage_results_title')
+                    //add text to the title via appendChild
+                    title.appendChild(titleContent)
+                    container.insertBefore(title, ans)
+            //insert title before answer id
+                }
+            //grab the first answer id
+            
         }
 
         //add the addEventListener function
@@ -88,6 +121,11 @@
                 yearTwoHour.value = ''
                 yearTwoBiWeek.value = ''
                 yearTwoYear.value = ''
+            //creates the result sections 
+                resultTitle('Wage Results', wageResults, upFrontDiv, '')
+                resultTitle('Upfront', upFrontDiv, upFrontHour, upfrontRaise)
+                resultTitle('Year One', yearOneDiv, yearOneHour, yearOneRaise)
+                resultTitle('Year Two', yearTwoDiv, yearTwoHour, yearTwoRaise)
             //calls all of the functions
                 getYearly(hourly, biWeekly)
                 upHourlyRaise(hourly, upfrontRaise)
