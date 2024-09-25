@@ -15,6 +15,10 @@
     let upFrontP = grabID('upFrontP')
     let yearOneP = grabID('yearOneP')
     let yearTwoP = grabID('yearTwoP')
+    let wageForm = grabID('wageForm')
+    let initWage = grabID('initWage')
+    let initHours = grabID('initHours')
+
     //store answer ids
     let upFrontHour = grabID('upFrontHourly')
     let upFrontBiWeek = grabID('upFrontBiWeekly')
@@ -86,12 +90,12 @@
             divP.textContent = raise
             return divP
         }
- 
 
         //add the addEventListener function
         document.getElementById('wageForm').addEventListener('submit', function(e){
             //prevents page from reloading 
             e.preventDefault();
+
             
             //grab the input variables 
             let hourly = Number(grabFormValues('hourly'))
@@ -120,6 +124,8 @@
               //if the result titles have the span
               //then run the removeSpan function
 
+              initWage.textContent = `Your Initial Wage: ${intoDollars(hourly.toFixed(2))}`
+              initHours.textContent = `Your Bi-Weekly Hours: ${biWeekly}`
             //creates the result sections 
             resultTitleFormat(upfrontRaise, upFrontP)
             resultTitleFormat(yearOneRaise, yearOneP)
@@ -139,6 +145,14 @@
 
                 wageResults.classList.remove('wage_results_inactive')
                 wageResults.classList.add('wage_results_active')
+
+                wageForm.reset()
+
+                hourly = ''
+                biWeekly = ''
+                upfrontRaise = ''
+                yearOneRaise = ''
+                yearTwoRaise = ''
            
         })
 

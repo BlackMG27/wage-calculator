@@ -35,7 +35,7 @@
               <fieldset>
                 <legend class="wage_form_legend">Raises</legend>
                 <div class="wage_form_group">
-                  <label for="upfrontRaise">Upfront Raise (in percent)</label>
+                  <label for="upfrontRaise">Upfront Raise (in percent as a whole number)</label>
                   <input
                     type="text"
                     id="upfrontRaise"
@@ -43,7 +43,7 @@
                   />
                 </div>
                 <div class="wage_form_group">
-                  <label for="yearOneRaise"> Year One Raise (in percent)</label>
+                  <label for="yearOneRaise"> Year One Raise (in percent as a whole number)</label>
                   <input
                     type="text"
                     id="yearOneRaise"
@@ -51,7 +51,7 @@
                   />
                 </div>
                 <div class="wage_form_group">
-                  <label for="yearTwoRaise">Year Two Raise (in percent)</label>
+                  <label for="yearTwoRaise">Year Two Raise (in percent as a whole number)</label>
                   <input
                     type="text"
                     id="yearTwoRaise"
@@ -63,7 +63,9 @@
             </form>
           </section>
           <section id="wageResults" class="wage_results_inactive">
-               <h2 class="wage_results_tile">Your Wage Results</h2> 
+               <h2 class="wage_results_tile">Your Wage Results (Pre-Tax & Benefits)</h2> 
+               <h4 id="initWage"></h4>
+               <h4 id="initHours"></h4>
               <div id="upFrontContainer" class="results_container">
                 <h3 id="upFrontTitle" class="results_container_title">
                     Your Upfront Wage Raise by: <span id="upFrontP" class="results_number"></span>
