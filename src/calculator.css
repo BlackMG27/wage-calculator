@@ -1,22 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
+* {
   box-sizing: border-box;
 }
 
-body{
-  font-family: 'Noto Sans', sans-serif;
+body {
+  font-family: "Noto Sans", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.calc-title{
+.calc-title {
   font-size: 3rem;
 }
 
-main{
+main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -24,14 +24,14 @@ main{
   justify-content: space-evenly;
 }
 
-.wage_form_container{
+.wage_form_container {
   display: flex;
   width: 47.5%;
   flex-direction: column;
   align-items: center;
 }
 
-.wage_form{
+.wage_form {
   width: 95%;
   max-width: 675px;
   padding: 20px;
@@ -40,73 +40,143 @@ main{
   border-radius: 4px;
 }
 
-.wage_form_group{
+.wage_form > fieldset {
+  border-radius: 6px;
+}
+
+.wage_form > fieldset:nth-child(1) {
+  margin-bottom: 40px;
+}
+
+.wage_form_group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
 }
 
-.wage_form_legend{
+.wage_form_legend {
   font-size: 1.35rem;
   font-weight: 600;
   margin-bottom: 20px;
 }
 
-.wage_form_group > label{
-  margin-bottom: .5rem;
+.wage_form_group > label {
+  margin-bottom: 0.5rem;
   font-size: 1.05rem;
 }
 
-.wage_form_group > input{
+.wage_form_group > input {
   font-size: 1.125rem;
   max-width: 600px;
   padding: 10px 15px;
   border-radius: 4px;
 }
 
-.wage_form_button{
+.wage_form_button {
   font-size: 1.5rem;
   width: 100%;
-  max-width: 600px;
+  /* max-width: 600px; */
   padding: 10px 25px;
   margin-top: 15px;
 }
 
-.wage_results_inactive{
+.wage_results_inactive {
   display: none;
 }
 
-.wage_results_active{
+.wage_results_active {
   width: 47.5%;
   max-width: 675px;
   display: flex;
   flex-direction: column;
 }
 
-.wage_results_title{
-
+.wage_results_title {
 }
 
-.results_container{
-
+.results_container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 15px;
+  vertical-align: middle;
+  border-radius: 6px;
+  margin-bottom: 40px;
 }
 
-.results_container > p{
+.results_container > p {
   font-size: 1.125rem;
 }
 
-.results_number{
-
+.results_number {
+  font-weight: 700;
 }
 
-.results_container_title{
+.initial_title {
+  font-size: 1.125rem;
+  margin: 5px 10px;
+}
+
+#upFrontContainer{
+  margin-top: 40px;
+}
+
+.results_container_title {
   margin-bottom: 5px;
-  border-bottom: 2px solid black;
+  width: 35%;
+  padding: 5px;
+  font-size: 1.45rem;
+  line-height: 2.6rem;
+  margin-right: 30px;
+}
+
+.results_info{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 350px;
+}
+
+.results_info > p{
+  padding-bottom: 15px;
+  border-bottom: 1px solid grey;
+}
+
+.results_info .results_number{
+  float: right;
+  border: 1px solid black;
+  padding: 4px 12px;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: 900px) {
   .wage_form_container,
-  .wage_results_active{
+  .wage_results_active {
     width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .results_container{
+    flex-direction: column;
+  }
+
+  .results_container_title{
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 700px) and  (max-width: 899px){
+  .results_container{
+    flex-direction: row;
+  }
+  .results_container_title{
+    width: 50%;
+  }
+
+  .results_info{
+    width: 100%;
+    max-width: 350px;
   }
 }
