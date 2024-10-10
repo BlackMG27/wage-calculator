@@ -32,8 +32,7 @@ main {
 }
 
 .wage_form {
-  width: 95%;
-  max-width: 675px;
+  max-width: 900px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -161,6 +160,22 @@ main {
   border: 1px solid black;
   padding: 4px 12px;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 432px){
+  .results_info{
+    width: 95%;
+    max-width: 300px;
+  }
+
+  .wage_form{
+
+  }
+
+  .results_info > p{
+    display: inline-flex;
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 900px) {
