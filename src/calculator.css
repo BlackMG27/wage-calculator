@@ -32,8 +32,7 @@ main {
 }
 
 .wage_form {
-  width: 95%;
-  max-width: 675px;
+  max-width: 900px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -80,6 +79,10 @@ main {
   margin-top: 15px;
 }
 
+.wage_form_button:hover{
+
+}
+
 .wage_results_inactive {
   display: none;
 }
@@ -115,6 +118,7 @@ main {
 .initial_title {
   font-size: 1.125rem;
   margin: 5px 10px;
+  display: inline-block;
 }
 
 #upFrontContainer{
@@ -123,30 +127,55 @@ main {
 
 .results_container_title {
   margin-bottom: 5px;
-  width: 35%;
-  padding: 5px;
+  width: 37.5%;
+  padding: 20px 25px;
   font-size: 1.45rem;
   line-height: 2.6rem;
-  margin-right: 30px;
+  margin-top: 0;
+  
+}
+
+.results_container_title > .results_number{
+  font-size: 3rem;
+  line-height: 4.5rem;
 }
 
 .results_info{
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 350px;
+  width: 360px;
+  margin: 0 auto;
 }
 
 .results_info > p{
   padding-bottom: 15px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(162, 162, 162);
+  font-size: 1.125rem;
 }
 
 .results_info .results_number{
   float: right;
+  font-size: 1.3rem;
   border: 1px solid black;
   padding: 4px 12px;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 432px){
+  .results_info{
+    width: 95%;
+    max-width: 300px;
+  }
+
+  .wage_form{
+
+  }
+
+  .results_info > p{
+    display: inline-flex;
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -157,7 +186,7 @@ main {
   }
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1297px) {
   .results_container{
     flex-direction: column;
   }
@@ -172,11 +201,13 @@ main {
     flex-direction: row;
   }
   .results_container_title{
-    width: 50%;
+    width: 45%;
+    padding: 15px;
+    margin-right: 10px;
   }
 
   .results_info{
     width: 100%;
-    max-width: 350px;
+    max-width: 340px;
   }
 }
