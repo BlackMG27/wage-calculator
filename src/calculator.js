@@ -8,12 +8,14 @@ let wageResults = grabID("wageResults");
 let upFrontDiv = grabID("upFrontContainer");
 let yearOneDiv = grabID("yearOneContainer");
 let yearTwoDiv = grabID("yearTwoContainer");
+let yearThreeDiv = grabID('yearThreeContainer')
 let upTitle = grabID("upFrontTitle");
 let oneTitle = grabID("yearOneTitle");
 let twoTitle = grabID("yearTwoTitle");
 let upFrontP = grabID("upFrontP");
 let yearOneP = grabID("yearOneP");
 let yearTwoP = grabID("yearTwoP");
+let yearThreeP = grabID("yearThreeP")
 let wageForm = grabID("wageForm");
 let initWage = grabID("initWage");
 let initHours = grabID("initHours");
@@ -28,6 +30,9 @@ let yearOneYear = grabID("yearOneYearly");
 let yearTwoHour = grabID("yearTwoHourly");
 let yearTwoBiWeek = grabID("yearTwoBiWeekly");
 let yearTwoYear = grabID("yearTwoYearly");
+let yearThreeHour = grabID('yearThreeHourly')
+let yearThreeBiWeek = grabID('yearThreeBiWeekly')
+let yearThreeYear = grabID('yearThreeYearly')
 
 //multiply by hours in bi-weekly, then by 26
 let yearly;
@@ -50,6 +55,12 @@ let yearTwoHourly;
 let yearTwoBiWeekly;
 //store yearTwoYearly
 let yearTwoYearly;
+//store yearThreeHourly
+let yearThreeHourly;
+//store yearThreeBiWeekly
+let yearThreeBiWeekly;
+//store value for year three yearly
+let yearThreeYearly;
 
 //grab the values as numbers
 //grabFormValues
@@ -103,6 +114,7 @@ document.getElementById("wageForm").addEventListener("submit", function (e) {
   //store yearOneRaise
   let yearOneRaise = Number(percentConvert("yearOneRaise"));
   let yearTwoRaise = Number(percentConvert("yearTwoRaise"));
+  let yearThreeRaise = Number(percentConvert("yearThreeRaise"))
   //clears the outputs
   if (titleRaise) {
     titleRaise = "";
@@ -117,6 +129,9 @@ document.getElementById("wageForm").addEventListener("submit", function (e) {
   yearTwoHour.value = "";
   yearTwoBiWeek.value = "";
   yearTwoYear.value = "";
+  yearThreeHour.value = "";
+  yearThreeBiWeek.value = "";
+  yearThreeYear.value = "";
 
   //if the result titles have the span
   //then run the removeSpan function
@@ -127,6 +142,7 @@ document.getElementById("wageForm").addEventListener("submit", function (e) {
   resultTitleFormat(upfrontRaise, upFrontP);
   resultTitleFormat(yearOneRaise, yearOneP);
   resultTitleFormat(yearTwoRaise, yearTwoP);
+  resultTitleFormat(yearThreeRaise, yearThreeP)
 
   //calls all of the functions
   getYearly(hourly, biWeekly);
@@ -139,6 +155,10 @@ document.getElementById("wageForm").addEventListener("submit", function (e) {
   yearTwoHourRaise(yearOneHourly, yearTwoRaise);
   yearTwoBiWeekRaise(yearTwoHourly, biWeekly);
   yearTwoYearRaise(yearTwoBiWeekly);
+  yearThreeHourRaise(yearTwoHourly, yearThreeRaise)
+  yearThreeBiWeekRaise(yearThreeHourly, biWeekly)
+  yearThreeYearRaise(yearThreeBiWeekly)
+
 
   wageResults.classList.remove("wage_results_inactive");
   wageResults.classList.add("wage_results_active");
@@ -150,6 +170,7 @@ document.getElementById("wageForm").addEventListener("submit", function (e) {
   upfrontRaise = "";
   yearOneRaise = "";
   yearTwoRaise = "";
+  yearThreeRaise= "";
 });
 
 //upfront
@@ -205,7 +226,7 @@ function yearOneYearRaise(biWeek) {
   yearOneYearly = biWeek * 26;
   //format the result
   formatNumber(intoDollars(yearOneYearly.toFixed(2)));
-  yearOneYear.textContent = `Year One Yearly Wage: `;
+  yearOneYear.textContent = `Year One Yearly Salary: `;
   yearOneYear.appendChild(numFormat);
 }
 //year 2
@@ -233,10 +254,33 @@ function yearTwoYearRaise(week) {
   yearTwoYearly = week * 26;
   //format the result
   formatNumber(intoDollars(yearTwoYearly.toFixed(2)));
-  yearTwoYear.textContent = `Year Two Yearly Wage: `;
+  yearTwoYear.textContent = `Year Two Yearly Salary: `;
   yearTwoYear.appendChild(numFormat);
 }
 
+//year three functions 
+function yearThreeHourRaise(hour, raise){
+  yearThreeHourly = hour + (hour * raise)
+  formatNumber(intoDollars(yearThreeHourly.toFixed(2)))
+  yearThreeHour.textContent = `Year Three Hourly Wage: `
+  yearThreeHour.appendChild(numFormat)
+}
+
+function yearThreeBiWeekRaise(hour, week){
+  yearThreeBiWeekly = hour * week
+  formatNumber(intoDollars(yearThreeBiWeekly.toFixed(2)))
+  yearThreeBiWeek.textContent = `Year Three Bi-Weekly Wage: `
+  yearThreeBiWeek.appendChild(numFormat)
+}
+
+function yearThreeYearRaise(week){
+  yearThreeYearly = week * 26
+  formatNumber(intoDollars(yearThreeYearly.toFixed(2)))
+  yearThreeYear.textContent = `Year Three Yearly Salary: `
+  yearThreeYear.appendChild(numFormat)
+}
+
+//formatting the result numbers 
 function formatNumber(wageNum) {
   numFormat = document.createElement("span");
   numFormat.classList.add("results_number");

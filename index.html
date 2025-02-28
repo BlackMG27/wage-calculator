@@ -20,7 +20,7 @@
               <input
                 type="text"
                 id="hourly"
-                placeholder="Enter your Hourly Wage"
+                placeholder="Please enter your Hourly Wage"
               />
             </div>
             <div class="wage_form_group">
@@ -28,7 +28,7 @@
               <input
                 type="text"
                 id="biWeekly"
-                placeholder="Enter your bi-weekly hours total"
+                placeholder="Please enter your bi-weekly hours total"
               />
             </div>
           </fieldset>
@@ -61,6 +61,16 @@
               <input
                 type="text"
                 id="yearTwoRaise"
+                placeholder="Please enter the year two raise in percentage"
+              />
+            </div>
+            <div class="wage_form_group">
+              <label for="yearThreeRaise"
+                >Year Three Raise (in percent as a whole number)</label
+              >
+              <input
+                type="text"
+                id="yearThreeRaise"
                 placeholder="Please enter the year two raise in percentage"
               />
             </div>
@@ -109,6 +119,17 @@
             <p id="yearTwoHourly"></p>
             <p id="yearTwoBiWeekly"></p>
             <p id="yearTwoYearly"></p>
+          </div>
+        </div>
+        <div id="yearThreeContainer" class="results_container">
+          <h3 id="yearThreeTitle" class="results_container_title">
+            Your Year Three Wage Raise by:
+            <span id="yearThreeP" class="results_number"></span>
+          </h3>
+          <div class="results_info">
+            <p id="yearThreeHourly"></p>
+            <p id="yearThreeBiWeekly"></p>
+            <p id="yearThreeYearly"></p>
           </div>
         </div>
       </section>
