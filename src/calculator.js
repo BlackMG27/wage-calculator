@@ -69,7 +69,7 @@ function grabFormValues(value) {
 }
 //turn values into percentage
 function percentConvert(value) {
-  return document.getElementById(value).value / 100;
+  return document.getElementById(value).value / 100
 }
 
 //grab ids
@@ -94,7 +94,7 @@ function intoDollars(wage) {
 
 //formats the wage results titles
 function resultTitleFormat(raise, divP) {
-  raise = (raise * 100).toFixed(1);
+  raise = (raise * 100).toFixed(2);
   raise = `${raise}%`;
   divP.textContent = raise;
   return divP;
